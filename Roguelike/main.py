@@ -4,34 +4,35 @@ import random
 import game
 import sys, os
 
+
 class Menu():
     def __init__(self):
         self.level = None
         self.levels_list = []
         self.menu_actions = {
-       'main_menu': self.main_menu,
-       '0': self.exit,
+            'main_menu': self.main_menu,
+            '0': self.exit,
         }
         print(
-    '''
-    - -- .-.
-- - /  |                - - /|_/|      .-------------------.
-   /   |  - _______________| @.@|     /    Welcome          )
-- |    |-- (______         >\_C/< ---/                     /
-  |    |  -  -   / ______  _/____)  (   to Kitten Saver!  /
--- \   | -  -   / /\ \   \ \         `-------------------'
- -  \  |     - (_/  \_) - \_)
-- -  | |
+            '''
+            - -- .-.
+        - - /  |                - - /|_/|      .-------------------.
+           /   |  - _______________| @.@|     /    Welcome          )
+        - |    |-- (______         >\_C/< ---/                     /
+          |    |  -  -   / ______  _/____)  (   to Kitten Saver!  /
+        -- \   | -  -   / /\ \   \ \         `-------------------'
+         -  \  |     - (_/  \_) - \_)
+        - -  | |
 
-'''
+        '''
         )
 
     def main_menu(self):
-        print ("Please choose the level you want to start:")
+        print("Please choose the level you want to start:")
         self.levels_list = os.listdir(os.path.join(os.path.dirname(os.path.realpath(__file__)), "levels"))
         print('-----------------')
         for i, name in enumerate(self.levels_list):
-            print(str(i+1),name)
+            print(str(i + 1), name)
         print('-----------------')
         print("0 Quit")
         choice = input(" >>  ")
@@ -56,11 +57,12 @@ class Menu():
 
 
     def back(self):
-       self.menu_actions['main_menu']()
+        self.menu_actions['main_menu']()
 
 
     def exit(self):
-       sys.exit()
+        sys.exit()
+
 
 if __name__ == "__main__":
     m = Menu()

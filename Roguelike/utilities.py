@@ -1,10 +1,16 @@
 import pygame
 import os
 import random
+import logging
+import time
+import datetime
 
-images_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),"images")
+images_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
+
 
 class Spritesheet(object):
+    """Split list of tiles"""
+
     def __init__(self, filename):
         try:
             self.sheet = pygame.image.load(os.path.join(images_dir, filename)).convert()
@@ -30,15 +36,31 @@ def re_roll(sides=6, number=1):
             if roll < sides:
                 dsum += roll
                 break
-            dsum += roll-1
+            dsum += roll - 1
     return dsum
 
 
 def write(msg="sd", fontcolor=(255, 0, 255), fontsize=42, font=None):
+    """Writes text"""
     myfont = pygame.font.SysFont(font, fontsize)
     mytext = myfont.render(msg, True, fontcolor)
     mytext = mytext.convert_alpha()
     return mytext
 
 
+class Logger:
+    """Logs events"""
+    def __init__(self):
+        file_handler = logging.FileHandler('roguelike.log')
+        logger = logging.getLogger('Game events')
+        logger.setLevel(logging.INFO)
+        logger.addHandler(file_handler)
+        self.logger = logger
+
+    def add_record(self, message):
+        self.logger.info(str(datetime.datetime.now())[:-7] + "  " + message)
+
+    def __exit__(self):
+        for file in self.files:
+            os.unlink(file)
 
